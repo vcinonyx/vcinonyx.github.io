@@ -1,0 +1,68 @@
+table{
+	height: 100%;
+	width: 100%;	
+	position: absolute; 
+	top: 0; 
+	bottom: 0; 
+	left: 0; 
+	right: 0;
+}
+
+.footer>p{
+	float:right;
+	font-size: 22px;
+	color: darkgray;
+}
+
+.menu>a{
+    color: #ADFF2F;
+    font-weight: bold;
+    font-size: 20px;
+    word-spacing: 0.2em;
+}
+
+.header, .footer {
+	padding: 0 1em;	
+	font-style: 
+	font-size: 18px;
+	background-color: #012169;
+	height: 16%;
+}
+
+.content-cell{
+	text-align: center;
+	font-style: oblique;
+	font-weight: 100;
+	padding: 20px;
+	background-color: #4682B4;
+}
+
+.menu{
+	font-family: Montserrat, sans-serif;
+}
+
+
+h2{
+	text-align: center;
+}
+
+
+h1{
+	color: #E0FFFF;
+}
+
+table, tr, td{
+    border: 2px solid #666;
+    border-collapse: collapse;
+ }
+
+.header>h1 {
+  	float: right;
+  }
+
+.footer>h1{
+  	float: left;
+}
+
+
+
