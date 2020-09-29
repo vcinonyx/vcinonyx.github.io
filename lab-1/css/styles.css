@@ -21,6 +21,11 @@ table{
     word-spacing: 0.2em;
 }
 
+table, tr, td{
+    border: 2px solid #666;
+    border-collapse: collapse;
+ }
+
 .header, .footer {
 	padding: 0 1em;	
 	font-size: 18px;
@@ -45,11 +50,6 @@ h2{
 h1{
 	color: #E0FFFF;
 }
-
-table, tr, td{
-    border: 2px solid #666;
-    border-collapse: collapse;
- }
 
 .header>h1 {
   	float: right;
