@@ -10,7 +10,7 @@ nav > a {
     font-size: 32px;
 }
 
-#content p {
+#content p{
     padding: 1em;
     font-family: Verdana, sans-serif;
 }
@@ -20,7 +20,7 @@ nav > a {
     font-weight: bold;
 }
 
-ul {
+ul{
     list-style-type: disc;
     font-family: Verdana;
     text-align: left;
@@ -32,10 +32,8 @@ ul {
 }
 
 #content {
-    position: relative;
     width: 100%;
     height: 85%;
-    text-align: center;
 }
 
 #header > h1 {
@@ -58,7 +56,6 @@ ul {
 
 
 #header{  
-    font-size: 18px;
     height: 15%;
     width: 100%;
     background-color: rgb(63, 52, 157);
