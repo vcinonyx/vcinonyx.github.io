@@ -1,25 +1,20 @@
-   
 
-//#region task 1
 // task 1
-swapHtml('.header > h1','.footer > h1');
+swapText('.header > h1','.footer > h1');
 
 document.querySelector('.header > h1').onclick = 
     function() {
-        swapHtml('.header > h1','.footer > h1');
+        swapText('.header > h1','.footer > h1');
     };
     
 document.querySelector('.footer > h1').onclick = 
     function() {
-        swapHtml('.header > h1','.footer > h1');
+        swapText('.header > h1','.footer > h1');
     };
 
-//#endregion
 
-//#region task 2
 // task 2
 CircleArea(20, 'block3');
-//#endregion task 2
 
 // task 3
 document.querySelector('#numberButton').addEventListener('click',   () => {
@@ -74,7 +69,7 @@ document.querySelector('#numberInput').onfocus =
 document.addEventListener("DOMContentLoaded", () => {
     for(let i = 1; i < 6; i++) {
     loadHtml('#'+'block'+i);
-    
+
     if(localStorage.getItem('#block' + i + '-text')) {
         document.querySelector('#block'+i+" > .form-input").style = "display:none;";
     }
@@ -94,12 +89,13 @@ document.querySelectorAll('.form-input-text').forEach(form =>
 document.querySelectorAll('.form-input-html').forEach(form =>
     {
         form.onsubmit = function(event)
-        { event.preventDefault();onsubmitFormInput(form,'html');}
+        { event.preventDefault();
+            onsubmitFormInput(form,'html');}
     });
 
 document.querySelectorAll('.btn-reset').forEach(btn =>
     { btn.onclick = function(event)
-        {btnClickReset(btn);}
+        {buttonClickReset(btn);}
     });
 
 
@@ -113,12 +109,11 @@ function onsubmitFormInput(form, formType) {
     let newHtml = document.querySelector('#' + blockId +
         '> .form-input > .form-input-' + formType + ' > textarea[name="input-' + formType + '"]').value;
 
-    if(!isValidHTML(newHtml))
-    {
+    if(!isValidHTML(newHtml)){
         formType = "text";
     }
         
-    localStorage.setItem('#' + blockId + '-'+ formType, newHtml);
+    localStorage.setItem('#' + blockId + '-' + formType, newHtml);
     if (formType == 'text')
         localStorage.removeItem('#' + blockId + '-html', newHtml);
     if (formType == 'html')
@@ -132,27 +127,24 @@ function onsubmitFormInput(form, formType) {
 
 
 function loadHtml(blockName){
-    if(localStorage.getItem(blockName + '-text') || localStorage.getItem(blockName + '-html'))
-    {
+    if(localStorage.getItem(blockName + '-text') || localStorage.getItem(blockName + '-html')) {
         document.querySelectorAll(blockName + '>*:not(.form-input)').forEach(c => c.outerHTML = '');
         document.querySelector(blockName +'> .btn-reset').style.display = 'block';
         document.querySelector(blockName +'> .btn-reset').innerHTML = 'Reset';
     }
 
-    if(localStorage.getItem(blockName + '-text'))
-    {
+    if(localStorage.getItem(blockName + '-text')) {
         var tc = document.createElement('div');
         tc.className = 'text-content';
         var p = document.createElement('p');
         p.innerText = localStorage.getItem(blockName + '-text');
-        tc.appendChild(p)
+        tc.appendChild(p);
         document.querySelector(blockName).appendChild(tc);
     }
 
-    if(localStorage.getItem(blockName + '-html'))
-    {   
+    if(localStorage.getItem(blockName + '-html')){   
         document.querySelector(blockName).innerHTML +=  localStorage.getItem(blockName + '-html'); 
-        document.querySelector(blockName +'>.btn-reset').onclick = function(event){btnClickReset(this);};
+        document.querySelector(blockName +'>.btn-reset').onclick = function(event){buttonClickReset(this);};
         document.querySelector(blockName + '>.form-input > .form-input-text').onsubmit = function(event)
             {event.preventDefault();onsubmitFormInput(this,'text');};
         document.querySelector(blockName + '>.form-input > .form-input-html').onsubmit = function(event)
@@ -160,23 +152,28 @@ function loadHtml(blockName){
     } 
 }
 
-function btnClickReset(btn){
-    if(localStorage.getItem('#' + btn.parentNode.id + '-text'))
-        localStorage.removeItem('#' + btn.parentNode.id + '-text');
-    if(localStorage.getItem('#' + btn.parentNode.id + '-html'))
-        localStorage.removeItem('#' + btn.parentNode.id + '-html');
+function buttonClickReset(button){
+    if(localStorage.getItem('#' + button.parentNode.id + '-text'))
+        localStorage.removeItem('#' + button.parentNode.id + '-text');
+    if(localStorage.getItem('#' + button.parentNode.id + '-html'))
+        localStorage.removeItem('#' + button.parentNode.id + '-html');
     location.reload();
 }
 
 
 function isValidHTML(html){
+    if(html.includes("<")) {
     const doc = document.createElement('div');
     doc.innerHTML = html;
     return doc.innerHTML === html;
+    }
+    else {
+        return false;
+    }
 }
 
 
-function swapHtml(block1, block2){
+function swapText(block1, block2){
     let temp = document.querySelector(block1).innerHTML;
     document.querySelector(block1).innerHTML = document.querySelector(block2).innerHTML;
     document.querySelector(block2).innerHTML = temp;
