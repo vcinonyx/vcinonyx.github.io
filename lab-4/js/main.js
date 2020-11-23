@@ -1,28 +1,32 @@
-//task1
 const task1blocks = ['.box-1','.box-2','.box-3'];
 const task2blocks = ['.header', '.footer'];
 
-async function swapContent(contentBlocksNames, delay = 0) {    
-    // зчитуємо вміст блоків
+//task1
+const sleep = msec => new Promise(resolve => {
+    setTimeout(() => resolve(new Date().toLocaleTimeString()), msec);
+  });
+
+async function swapContent(delay = 0) {    
+
     let blocksHtml = [];
-    contentBlocksNames.forEach(classname => {
+    task1blocks.forEach(classname => {
         blocksHtml.push(document.querySelector(classname).innerHTML);
     });
+
+    // console.log(new Date().toLocaleTimeString());
 
     for (let index = 0; index < blocksHtml.length - 1; index++)
     {
         await sleep(delay);
-        document.querySelector(contentBlocksNames[index+1]).innerHTML = blocksHtml[index];
-        // delay +=5000; чтобы каждый раз +5 секунд
+        document.querySelector(task1blocks[index+1]).innerHTML = blocksHtml[index];
+        // console.log(result);
+       // delay +=5000; //чтобы каждый раз +5 секунд
     }
 
     await sleep(delay);
-    document.querySelector(contentBlocksNames[0]).innerHTML = blocksHtml[blocksHtml.length-1];
+    document.querySelector(task1blocks[0]).innerHTML = blocksHtml[blocksHtml.length-1];
+    // console.log(result);    
 }
-
-const sleep = msec => new Promise(resolve => {
-    setTimeout(resolve, msec);
-  });
 
 
 // task 2
@@ -63,35 +67,36 @@ function getRandomColor() {
     return color;
   }
 
+
 // task 3
 
 async function addCommitsToBlock(blockName){
-
-    let username = document.querySelector('#git-commits-form > input[name="username"]').value;
-    let repositoryName = document.querySelector('#git-commits-form > input[name="repository-name"]').value;
-    let response = await fetch(`https://api.github.com/repos/${username}/${repositoryName}/commits`);
-    
+    let gitUser = document.querySelector('#git-commits-form > input[name="username"]').value;
+    let gitRepository = document.querySelector('#git-commits-form > input[name="repository-name"]').value;
+    const response = await fetch(`https://api.github.com/repos/${gitUser}/${gitRepository}/commits`);
     let div = document.createElement('div');
     div.id = "commits-content";
     div.style.height = "20%";
     div.style.overflow = "auto";
-
     let ul = document.createElement('ul');
+    
     if (response.ok) 
     {
-        response.json().then(data => data.forEach(c => 
+        let result = await response.json();
+        result.forEach(c => 
             {
+                console.log(c);
                 let li = document.createElement('li');
                 li.textContent = `${c.commit.author.name} : ${c.commit.message}`;
                 ul.append(li);
-            }));
+            });
         div.append(ul);
     }
     
     else 
     {
         let p = document.createElement('p');
-        p.textContent = `Error : ${response.status}(${response.statusText})`;
+        p.textContent = `An error has occured: ${response.status}(${response.statusText})`;
         p.style = 'display:border-box; background:red; padding = 1em;';
         div.append(p);
     }
@@ -119,7 +124,7 @@ document.addEventListener('submit', function(event)
             {
                 document.querySelector('#sort-content').remove();
             }
-            sortListOfValuesToBlock('#' + document.querySelector('#sort-form').parentNode.id);
+            sortListOfValuesToBlock();
             document.querySelector('#sort-form').reset();
         }
     });
@@ -140,7 +145,7 @@ function C() {
 }
 
 
-function sortListOfValuesToBlock(blockName)
+function sortListOfValuesToBlock()
 {
     let inputList = document.querySelector('#sort-form > input[name="list-of-values"]').value;
     let numberList = inputList.match(/\d+/g).map(Number);
@@ -149,7 +154,7 @@ function sortListOfValuesToBlock(blockName)
         console.log('Error: no number in the list');
     else{
         console.log('Unsorted list: ');
-        console.log(numberList.slice());
+        console.log(numberList);
         console.log('Sorted list: ')
         console.log(insertionSort(numberList));
     }
@@ -171,6 +176,6 @@ function insertionSort(inputArr) {
 }
 
 
-swapContent(task1blocks, 5000);
+swapContent(5000);
 changeColor(5000);
 A(B, C);
