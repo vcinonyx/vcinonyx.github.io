@@ -1,31 +1,26 @@
 const task1blocks = ['.box-1','.box-2','.box-3'];
 const task2blocks = ['.header', '.footer'];
 
+
 //task1
 const sleep = msec => new Promise(resolve => {
     setTimeout(() => resolve(new Date().toLocaleTimeString()), msec);
   });
 
-async function swapContent(delay = 0) {    
-
+async function swapContent(delay) {    
     let blocksHtml = [];
     task1blocks.forEach(classname => {
         blocksHtml.push(document.querySelector(classname).innerHTML);
     });
 
-    // console.log(new Date().toLocaleTimeString());
-
     for (let index = 0; index < blocksHtml.length - 1; index++)
     {
         await sleep(delay);
         document.querySelector(task1blocks[index+1]).innerHTML = blocksHtml[index];
-        // console.log(result);
-       // delay +=5000; //чтобы каждый раз +5 секунд
     }
 
     await sleep(delay);
     document.querySelector(task1blocks[0]).innerHTML = blocksHtml[blocksHtml.length-1];
-    // console.log(result);    
 }
 
 
@@ -69,7 +64,6 @@ function getRandomColor() {
 
 
 // task 3
-
 async function addCommitsToBlock(blockName){
     let gitUser = document.querySelector('#git-commits-form > input[name="username"]').value;
     let gitRepository = document.querySelector('#git-commits-form > input[name="repository-name"]').value;
@@ -80,12 +74,10 @@ async function addCommitsToBlock(blockName){
     div.style.overflow = "auto";
     let ul = document.createElement('ul');
     
-    if (response.ok) 
-    {
+    if (response.ok) {
         let result = await response.json();
         result.forEach(c => 
             {
-                console.log(c);
                 let li = document.createElement('li');
                 li.textContent = `${c.commit.author.name} : ${c.commit.message}`;
                 ul.append(li);
@@ -93,8 +85,7 @@ async function addCommitsToBlock(blockName){
         div.append(ul);
     }
     
-    else 
-    {
+    else {
         let p = document.createElement('p');
         p.textContent = `An error has occured: ${response.status}(${response.statusText})`;
         p.style = 'display:border-box; background:red; padding = 1em;';
@@ -107,7 +98,7 @@ async function addCommitsToBlock(blockName){
 
 document.addEventListener('submit', function(event)
     {
-        if(event?.target.id == 'git-commits-form')
+        if(event.target.id == 'git-commits-form')
         {
             event.preventDefault();
             if(document.querySelector('#commits-content'))
@@ -117,7 +108,7 @@ document.addEventListener('submit', function(event)
             addCommitsToBlock('#' + document.querySelector('#git-commits-form').parentNode.id);
             document.querySelector('#git-commits-form').reset();
         }
-        if(event?.target.id == 'sort-form')
+        if(event.target.id == 'sort-form')
         {
             event.preventDefault();
             if(document.querySelector('#sort-content'))
@@ -131,9 +122,14 @@ document.addEventListener('submit', function(event)
 
 
 function A(callback1, callback2) {
-    console.log("I am an A function")
-    callback1();
-    callback2();
+    console.log(new Date().toLocaleTimeString());
+    console.log("I am an A function");
+
+    sleep(2000)
+        .then(message =>  {console.log(message); callback1();})
+        .then(() => sleep(3000))
+        .then(message2 =>  {console.log(message2); callback2();});
+    
 }
 
 function B() {
