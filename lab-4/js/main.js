@@ -110,10 +110,6 @@ document.addEventListener('submit', function(event)
         if(event.target.id == 'sort-form')
         {
             event.preventDefault();
-            if(document.querySelector('#sort-content'))
-            {
-                document.querySelector('#sort-content').remove();
-            }
             sortListOfValuesToBlock();
             document.querySelector('#sort-form').reset();
         }
