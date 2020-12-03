@@ -1,0 +1,101 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 15% 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "header header header "
+    "box-1 box-1 sidebar "
+    "box-1 box-1 sidebar "
+    "box-1 box-1 sidebar "
+    "box-1 box-1 sidebar ";
+  height: 100vh;
+}
+
+body{
+  margin: 0;
+}
+
+.sidebar { 
+  grid-area: sidebar;
+}
+
+.header { 
+  grid-area: header;
+}
+
+
+.box-1 { 
+  grid-area: box-1; 
+  background-color: azure;
+}
+
+
+.header, .footer{
+  background-color: rgb(255, 244, 0);
+  font-family: Verdana;
+  font-weight: bold;
+}
+
+nav > a {
+  padding: 2em;
+    color: black;
+    font-size: 2em;
+}
+
+.header > h1 {
+    float: right;
+    font-size: 1.5em;
+    font-weight: bold;  
+    padding: 0 1em;
+}
+
+
+ol {
+  list-style-type: disc;
+  font-family: Verdana;
+  text-align: left;
+  padding: 2em;
+}
+
+.grid-item, .sidebar {
+  background-color: rgb(175, 207, 175);
+  justify-content: center;
+}
+
+.grid-item p{
+  text-align: center;
+  padding: 1em;
+  font-family: Verdana, sans-serif;
+} 
+
+form{
+  justify-content: center;
+  padding: 0.15em;
+  display: flex;
+  margin-top: 28%;
+}
+
+button, input{
+  size: 2.5em;
+  align-content: center;
+  border:solid 0px rgb(150, 45, 45);
+}
+
+.squad {
+  text-align: center;
+}
+
+input {
+  width: 40%;
+}
+
+button {
+  width: 10%;
+}
+
+textarea{
+  width: 40%;
+}
+
+
+  

@@ -12,9 +12,8 @@ async function swapContent(delay) {
     task1blocks.forEach(classname => {
         blocksHtml.push(document.querySelector(classname).innerHTML);
     });
-
-    for (let index = 0; index < blocksHtml.length - 1; index++)
-    {
+    
+    for (let index = 0; index < blocksHtml.length - 1; index++){
         await sleep(delay);
         document.querySelector(task1blocks[index+1]).innerHTML = blocksHtml[index];
     }
