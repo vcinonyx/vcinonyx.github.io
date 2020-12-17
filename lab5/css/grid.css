@@ -1,0 +1,99 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 15% 1fr 1fr 1fr 1fr 15%;
+  grid-template-areas:
+    "header header header header"
+    "box-1 box-2 box-2 sidebar"
+    "box-1 box-2 box-2 sidebar"
+    "box-3 box-2 box-2 sidebar"
+    "box-3 box-2 box-2 sidebar"
+    "footer footer footer sidebar";  
+  height: 100vh;
+}
+
+.box-2  {
+  text-align: center;
+}
+
+.sidebar > form {
+  display: flex;
+  flex-direction: column; 
+  border: 1px solid rgb(166, 49, 182);
+}
+
+body{
+  margin: 0;
+}
+
+.sidebar { 
+  grid-area: sidebar;
+  text-align: center;
+}
+
+.header { 
+  grid-area: header;
+}
+
+.box-2 { 
+  grid-area: box-2;
+}
+
+.box-1 { 
+  grid-area: box-1; 
+}
+
+.box-3 { 
+  grid-area: box-3; 
+}
+
+.footer { 
+  grid-area: footer; 
+}
+
+.header, .footer{
+  background-color: rgb(255, 244, 0);
+  font-family: Verdana;
+  font-weight: bold;
+}
+
+nav > a {
+  padding: 2em;
+    color: black;
+    font-size: 2em;
+}
+
+.header > h1 {
+    float: right;
+    font-size: 1.5em;
+    font-weight: bold;  
+    padding: 0 1em;
+}
+
+.footer > h1 {
+  float: left;
+  padding: 0.5em;
+}
+
+.footer > p {
+    float: right;
+    padding: 0 2em;
+    font-size: 1em;
+}
+
+ul {
+  list-style-type: disc;
+  font-family: Verdana;
+  text-align: left;
+  padding: 2em;
+}
+
+.grid-item, .sidebar {
+  background-color: rgb(175, 207, 175);
+}
+
+.grid-item p{
+  text-align: center;
+  padding: 1em;
+  font-family: Verdana, sans-serif;
+} 
