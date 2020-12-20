@@ -3,14 +3,14 @@ createAnimationWorkspace();
 createAnimationControls();
 createAnimationArea();
 
-document.querySelector("#play-button").addEventListener('click', function(event)
-    {
+document.querySelector("#play-button").addEventListener('click', () => {
+        document.dispatchEvent(new CustomEvent('animMessage', {detail: {message: 'Opened animation window'}}))
         document.querySelector("#animation-work-container").style.display = "flex"; 
     });
 
 
-function createPlayButton(blockName)
-{
+function createPlayButton(blockName) {
+
     let play = document.createElement("button");
     play.id = "play-button";
     play.textContent = "Play Animation";
@@ -20,8 +20,8 @@ function createPlayButton(blockName)
 }
 
 
-function createAnimationWorkspace()
-{
+function createAnimationWorkspace() {
+
     let workContiner = document.createElement("div");
     workContiner.id = "animation-work-container";
     workContiner.style = 
@@ -38,20 +38,20 @@ function createAnimationWorkspace()
     document.querySelector(".grid-container").append(workContiner);
 }
 
-function createAnimationArea()
-{
+function createAnimationArea() {
+
     let animAreaCanvas = document.createElement("canvas");
     animAreaCanvas.id = "animation-area-canvas";
-    animAreaCanvas.style = "width: calc(100% - 10px); height: calc(100% - 50px);" +
+    animAreaCanvas.style = "width: calc(100% - 10px); height: calc(100% - 60px);" +
         "border: 5px solid red; box-sizing: content-box;" +
-        "background-color: gray; background-image: url('img/batthern.png');";
+        "background-color: gray;";
     animAreaCanvas.style.display = "none";
 
     let animAreaDiv = document.createElement("div");
     animAreaDiv.id = "animation-area-div";
     animAreaDiv.style = "width: calc(100% - 10px); height: calc(100% - 50px);" +
         "border: 5px solid red; box-sizing: content-box; position: relative; " + 
-        "background-color: blue; background-image: url('img/batthern.png');";;
+        "background-color: blue; background-image: url('./img/favicon-32x32.png');";;
     animAreaDiv.style.display = "flex";
 
     let tex1 = document.createElement("div");
@@ -63,8 +63,8 @@ function createAnimationArea()
     document.querySelector("#animation-work").append(animAreaDiv);
 }
 
-function createAnimationControls()
-{
+function createAnimationControls() {
+
     let controls = document.createElement("div");
     controls.id="animation-controls";
     controls.style = "width: 100%; height: 50px;" +
@@ -106,7 +106,7 @@ function createAnimationControls()
     btn_stop.id = "stop-button";
     btn_stop.textContent = "Stop";
     btn_stop.style.fontSize = "15px";
-    btn_stop.style.visibility = 'hidden';
+    btn_stop.style.display = "none";
 
     controls.append(close);
     controls.append(play_1);
