@@ -4,9 +4,9 @@ createAnimationControls();
 createAnimationArea();
 
 document.querySelector("#play-button").addEventListener('click', () => {
-        document.dispatchEvent(new CustomEvent('animMessage', {detail: {message: 'Opened animation window'}}))
-        document.querySelector("#animation-work-container").style.display = "flex"; 
-    });
+    document.dispatchEvent(new CustomEvent('animationMessage', {detail: {message: 'Opened animation window'}}))
+    document.querySelector("#animation-work-container").style.display = "flex"; 
+});
 
 
 function createPlayButton(blockName) {
