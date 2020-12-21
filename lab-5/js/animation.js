@@ -39,7 +39,7 @@ const moveBall = (ball, width, height) => {
     } if(ball.x < 0) {
         ball.velX = -(ball.velX);
 		document.dispatchEvent(new CustomEvent('animationMessage', {detail: {message: 'Touched left'}}))
- 	} if(ball.y + ball.item.offsetHeight >= height) {
+ 	} if(ball.y + ball.item.offsetHeight + 10 >= height) {
 		ball.velY = -(ball.velY)
 		document.dispatchEvent(new CustomEvent('animationMessage', {detail: {message: 'Touched bottom'}}))
 	} if(ball.y < 0) {
@@ -54,7 +54,7 @@ const moveBall = (ball, width, height) => {
 }
 
 
-const playJsAnim = () => {
+const runAnim = () => {
     document.dispatchEvent(new CustomEvent('animationMessage', {detail: {message: 'Launched animation'}}))
     const width = document.getElementById('animation-area-div').offsetWidth;
     const height = document.getElementById('animation-area-div').offsetHeight;
@@ -64,13 +64,13 @@ const playJsAnim = () => {
 }
 
 
-const stopJsAnim = () => {
+const stopAnim = () => {
     document.dispatchEvent(new CustomEvent('animationMessage', {detail: {message: 'Stopped animation'}}))
     clearInterval(ballInterval);
 }
 
 
-const reloadJsAnim = () => {
+const reloadAnim = () => {
     document.dispatchEvent(new CustomEvent('animationMessage', {detail: {message: 'Reloaded animation'}}))
     ball.x = 0;
     ball.y = 0;
@@ -166,7 +166,7 @@ document.getElementById('stop-button').addEventListener("click", () => {
     console.log(animationType);
     if (animationType === 1) {
         document.getElementById('play1').style.display = 'flex';
-        stopJsAnim();
+        stopAnim();
     } else if (animationType === 2) {
         document.getElementById('play2').style.display = 'flex';
         stopCanvasAnim();
@@ -179,7 +179,7 @@ document.getElementById("reload-button").addEventListener('click', () => {
     if (animationType === 1) {
         document.getElementById('Ball').style.display = "flex";
         document.getElementById('play1').style.display = "flex";
-        reloadJsAnim();
+        reloadAnim();
     } else if (animationType === 2) {
         document.getElementById('play2').style.display = "block";
         reloadCanvasAnim();
@@ -194,7 +194,7 @@ document.getElementById("play1").addEventListener('click', () => {
     document.getElementById("Ball").style.display = "flex";
     document.getElementById('stop-button').style.display = "block";
     document.getElementById("play1").style.display = "none";
-    playJsAnim();
+    runAnim();
 });
 
 
