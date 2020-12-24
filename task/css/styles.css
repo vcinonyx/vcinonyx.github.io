@@ -1,0 +1,18 @@
+html, body {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+#userForm {
+  text-align: center;
+  padding: 70px 0;
+}
+
+#text {
+  text-align: center;
+  padding: 70px 0;
+}
