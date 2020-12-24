@@ -3,7 +3,7 @@ document.getElementById('filter-button').addEventListener("click", () => {
     let substr = document.getElementById('user-substr').value;
     let regexp = new RegExp(`${substr}+\\d`);
 
-    arr.forEach( (word, index) => {
+    arr.forEach((word, index) => {
         let indexOfSubstr = word.match(regexp)? word.match(regexp).index : -1;
         if(indexOfSubstr > -1) { 
             arr[index] = word.substring(0, indexOfSubstr) + word.substring(indexOfSubstr + substr.length, word.length)
