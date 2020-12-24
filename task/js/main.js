@@ -1,11 +1,13 @@
 document.getElementById('filter-button').addEventListener("click", () => {
-
     let arr = document.getElementById('text').innerHTML.split(' ');
     let substr = document.getElementById('user-substr').value;
     let regexp = new RegExp(`${substr}+\\d`);
 
-    arr.forEach((word, index) => {
-        arr[index] = word.match(regexp)? word.replace(substr, '') : word;
+    arr.forEach( (word, index) => {
+        let indexOfSubstr = word.match(regexp)? word.match(regexp).index : -1;
+        if(indexOfSubstr > -1) { 
+            arr[index] = word.substring(0, indexOfSubstr) + word.substring(indexOfSubstr + substr.length, word.length)
+        }
     });
     
     let result = arr.join(' ');
