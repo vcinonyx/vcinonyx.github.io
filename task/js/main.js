@@ -4,12 +4,12 @@ document.getElementById('filter-button').addEventListener("click", () => {
     let regexp = new RegExp(`${substr}+\\d`);
 
     arr.forEach((word, index) => {
-        let indexOfSubstr = word.match(regexp)? word.match(regexp).index : -1;
-        if(indexOfSubstr > -1) { 
-            arr[index] = word.substring(0, indexOfSubstr) + word.substring(indexOfSubstr + substr.length, word.length)
+        while(word.match(regexp)) {
+            let indexOfSubstr = word.match(regexp).index;
+            word = arr[index] = word.substring(0, indexOfSubstr) + word.substring(indexOfSubstr + substr.length, word.length);
         }
-    });
-    
+    });    
+
     let result = arr.join(' ');
     document.getElementById('text').innerHTML = result;     
 })
