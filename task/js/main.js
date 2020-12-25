@@ -1,19 +1,31 @@
 document.getElementById('filter-button').addEventListener("click", () => {
     let arr = document.getElementById('text').innerHTML.split(' ');
     let substr = document.getElementById('user-substr').value;
-    let regexp = new RegExp(`${substr}+\\d`);
+    let regexp = new RegExp(`${substr}+\\d`, 'g');
 
     arr.forEach((word, index) => {
-        while(word.match(regexp)) {
-            let indexOfSubstr = word.match(regexp).index;
-            word = arr[index] = word.substring(0, indexOfSubstr) + word.substring(indexOfSubstr + substr.length, word.length);
+        console.log(regexp);
+        if(word.match(regexp)) {
+            let indexOfMatch = matchFrom(word, regexp, 0);
+            word = arr[index] = word.substring(0, indexOfMatch) + word.substring(indexOfMatch + substr.length, word.length);
+            while(matchFrom(word, regexp, indexOfMatch + 1) > 0) {
+                indexOfMatch  = matchFrom(word, regexp, indexOfMatch + 1);
+                word = arr[index] = word.substring(0, indexOfMatch) + word.substring(indexOfMatch + substr.length, word.length);
+                }
+            }
         }
-    });    
+    );    
 
     let result = arr.join(' ');
+    console.log(result);
     document.getElementById('text').innerHTML = result;     
 })
 
+function matchFrom(str, reg, fromIndex) {
+    for (const match of str.matchAll(reg)) {
+      if (match.index >= fromIndex) return match.index;
+    } return -1;
+  }
 
 document.getElementById('add-text-button').addEventListener("click", () => {
     let new_text = document.getElementById('user-text').value;
