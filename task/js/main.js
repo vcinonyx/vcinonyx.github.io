@@ -4,7 +4,6 @@ document.getElementById('filter-button').addEventListener("click", () => {
     let regexp = new RegExp(`${substr}+\\d`, 'g');
 
     arr.forEach((word, index) => {
-        console.log(regexp);
         if(word.match(regexp)) {
             let indexOfMatch = matchFrom(word, regexp, 0);
             word = arr[index] = word.substring(0, indexOfMatch) + word.substring(indexOfMatch + substr.length, word.length);
@@ -17,7 +16,6 @@ document.getElementById('filter-button').addEventListener("click", () => {
     );    
 
     let result = arr.join(' ');
-    console.log(result);
     document.getElementById('text').innerHTML = result;     
 })
 
